@@ -1,33 +1,27 @@
-const { MongoClient } = require('mongodb');
-const data = require('./data.js').data; // подключаем подготовленные данные
+// createDB.js
+const mongoose = require('mongoose');
+const Cat = require('./models/cat').Cat; // модель Cat
+const data = require('./data.js').data;  // подготовленные данные
 
-// Connection URL
-const url = 'mongodb://localhost:27017';
-const client = new MongoClient(url);
-
-// Database Name
-const dbName = 'test2024';
+// Подключаемся к базе
+mongoose.connect('mongodb://127.0.0.1:27017/testMongoose2024');
 
 async function main() {
-  // Подключаемся к серверу
-  await client.connect();
-  console.log('Connected successfully to cats');
+  try {
+    // Чистим коллекцию, чтобы не дублировать данные
+    await Cat.deleteMany({});
+    console.log('Старые записи удалены');
 
-  const db = client.db(dbName);
-  const collection = db.collection('documents');
+    // Вставляем подготовленные данные
+    const result = await Cat.insertMany(data);
+    console.log('Данные успешно добавлены:', result);
 
-  // Проверяем, что данные корректно подключились
-  console.log('Подключенные данные:', data);
-
-  // Вставляем данные в коллекцию
-  const insertResult = await collection.insertMany(data);
-  console.log('Inserted documents =>', insertResult);
-  
-
-  return 'done.';
+  } catch (err) {
+    console.error('Ошибка при вставке данных:', err);
+  } finally {
+    await mongoose.disconnect();
+    console.log('Соединение с MongoDB закрыто');
+  }
 }
 
-main()
-  .then(console.log)
-  .catch(console.error)
-  .finally(() => client.close());
+main();
