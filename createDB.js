@@ -11,7 +11,7 @@ const dbName = 'test2024';
 async function main() {
   // Подключаемся к серверу
   await client.connect();
-  console.log('Connected successfully to server');
+  console.log('Connected successfully to cats');
 
   const db = client.db(dbName);
   const collection = db.collection('documents');
@@ -22,6 +22,7 @@ async function main() {
   // Вставляем данные в коллекцию
   const insertResult = await collection.insertMany(data);
   console.log('Inserted documents =>', insertResult);
+  
 
   return 'done.';
 }
