@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
-<body>
-    <h1><%= title %></h1>
+<% layout('./layout/page.ejs') %>
 
-    <p>Добро пожаловать на наш сайт о котиках!</p>
-    <p>Здесь вы можете посмотреть страницы про наших героев:</p>
-
-    <ul>
-        <li><a href="/korzhik">Коржик</a></li>
-        <li><a href="/karamelka">Карамелька</a></li>
-        <li><a href="/kompot">Компот</a></li>
-    </ul>
-
-    <img src="/images/welcome.png" alt="Добро пожаловать" style="max-width:300px;">
-
-</body>
-</html>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>

@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title><%= message %></title>
-</head>
-<body>
-  <h1>Ошибка</h1>
-  <p>Status: <%= error.status %></p>
-  <pre><%= error.stack %></pre>
-</body>
-</html>
+<% layout('./layout/page.ejs') %>
+
+<h1><%= message %></h1>
+<h2><%= error.status %></h2>
+<pre><%= error.stack %></pre>
+
